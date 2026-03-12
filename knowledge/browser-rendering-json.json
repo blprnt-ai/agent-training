@@ -1,0 +1,73 @@
+{
+  "id": "browser-rendering-json-v1",
+  "type": "doc",
+  "version": "v1",
+  "source": {
+    "url": "https://developers.cloudflare.com/browser-rendering/rest-api/json-endpoint",
+    "title": "JSON endpoint · Cloudflare Browser Rendering docs",
+    "acquisition": "targeted Context7 doc query against /websites/developers_cloudflare_browser-rendering",
+    "capturedAt": "2026-03-11"
+  },
+  "tags": [
+    "cloudflare",
+    "browser-rendering",
+    "rest-api",
+    "json",
+    "structured-data",
+    "ai"
+  ],
+  "summary": "The /json endpoint is for AI-assisted typed structured extraction from rendered pages. The key lever is response_format, especially json_schema, so the caller describes the desired output shape instead of scraping raw selectors by hand.",
+  "content": {
+    "purpose": [
+      "Use /json when the goal is typed structured data extraction rather than raw DOM capture.",
+      "It is the Browser Rendering path recommended in the overview for AI-powered data extraction."
+    ],
+    "endpoint": {
+      "method": "POST",
+      "path": "/accounts/<accountId>/browser-rendering/json"
+    },
+    "requestCore": {
+      "response_format": {
+        "type": "json_schema"
+      }
+    },
+    "schemaPattern": [
+      "Provide a JSON schema describing the typed object you want returned.",
+      "Example docs pattern: an object with a products array, where each item can require fields like name and optionally link."
+    ],
+    "practicalNotes": [
+      "This endpoint trades explicit selector logic for prompt/schema-driven typed extraction.",
+      "If the output shape matters, define it tightly in response_format instead of trusting a vague schema."
+    ],
+    "exampleShape": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "link": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cleaning": {
+    "removed": [
+      "curl boilerplate",
+      "credential placeholders",
+      "non-json endpoint content"
+    ],
+    "notes": "The available targeted source exposed schema usage more clearly than full prose. This file captures the usable contract honestly and stops there."
+  }
+}

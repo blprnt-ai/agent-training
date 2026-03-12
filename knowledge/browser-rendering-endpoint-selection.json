@@ -1,0 +1,44 @@
+{
+  "id": "browser-rendering-endpoint-selection-v1",
+  "type": "guide",
+  "version": "v1",
+  "source": {
+    "title": "Browser Rendering endpoint selection guidance",
+    "basis": "Repo-local hardening layer synthesized from tracked Browser Rendering docs",
+    "capturedAt": "2026-03-12"
+  },
+  "tags": [
+    "browser-rendering",
+    "endpoint-selection",
+    "crawl",
+    "json",
+    "scrape"
+  ],
+  "summary": "Use /crawl for multi-page acquisition with per-page markdown in observed records, /json for schema-shaped typed structured extraction, and /scrape for selector-based extraction from one rendered page.",
+  "content": {
+    "decisionTable": [
+      {
+        "job": "Multi-page docs or site capture",
+        "endpoint": "/crawl",
+        "why": "It starts an asynchronous crawl job for multi-page acquisition and returns a pollable job artifact rather than a one-page selector result."
+      },
+      {
+        "job": "Schema-shaped or typed field extraction from rendered content",
+        "endpoint": "/json",
+        "why": "Its core contract is response_format with json_schema for typed structured output."
+      },
+      {
+        "job": "Specific CSS selector extraction from one rendered page",
+        "endpoint": "/scrape",
+        "why": "Its contract is selector-driven extraction with fields like text, html, attributes, and layout data."
+      }
+    ],
+    "antiConfusion": [
+      "/crawl is not the selector endpoint.",
+      "/scrape is not the schema-shaped endpoint.",
+      "/json is for structured extraction, not site-wide crawling.",
+      "For binary-choice prompts, name the correct endpoint and reason first; do not mention the excluded endpoint unless the prompt explicitly asks for comparison.",
+      "For one-endpoint prompts, stay on that endpoint instead of widening into a product menu."
+    ]
+  }
+}

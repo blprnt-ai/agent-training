@@ -1,0 +1,89 @@
+{
+  "bundle": "browser-rendering-first-pass",
+  "version": "v1",
+  "basis": "Small tracked Browser Rendering corpus built from the repo-local real crawl artifact plus targeted source capture for missing core topics.",
+  "artifactCount": 7,
+  "artifacts": [
+    {
+      "id": "browser-rendering-overview-v1",
+      "path": "knowledge/browser-rendering-overview.json",
+      "sourceUrl": "https://developers.cloudflare.com/browser-rendering/",
+      "title": "Browser Rendering · Cloudflare Browser Rendering docs",
+      "tags": [
+        "browser-rendering",
+        "overview",
+        "first-pass"
+      ]
+    },
+    {
+      "id": "browser-rendering-crawl-v1",
+      "path": "knowledge/browser-rendering-crawl.json",
+      "sourceUrl": "https://developers.cloudflare.com/browser-rendering/rest-api/crawl-endpoint",
+      "title": "Crawl endpoint · Cloudflare Browser Rendering docs",
+      "tags": [
+        "browser-rendering",
+        "crawl",
+        "rest-api",
+        "beta"
+      ]
+    },
+    {
+      "id": "browser-rendering-json-v1",
+      "path": "knowledge/browser-rendering-json.json",
+      "sourceUrl": "https://developers.cloudflare.com/browser-rendering/rest-api/json-endpoint",
+      "title": "JSON endpoint · Cloudflare Browser Rendering docs",
+      "tags": [
+        "browser-rendering",
+        "json",
+        "rest-api",
+        "structured-data"
+      ]
+    },
+    {
+      "id": "browser-rendering-scrape-v1",
+      "path": "knowledge/browser-rendering-scrape.json",
+      "sourceUrl": "https://developers.cloudflare.com/browser-rendering/rest-api/scrape-endpoint",
+      "title": "Scrape endpoint · Cloudflare Browser Rendering docs",
+      "tags": [
+        "browser-rendering",
+        "scrape",
+        "rest-api",
+        "selectors"
+      ]
+    },
+    {
+      "id": "browser-rendering-limits-v1",
+      "path": "knowledge/browser-rendering-limits.json",
+      "sourceUrl": "https://developers.cloudflare.com/browser-rendering/limits",
+      "title": "Limits and constraints · Cloudflare Browser Rendering docs",
+      "tags": [
+        "browser-rendering",
+        "limits",
+        "constraints",
+        "timeouts"
+      ]
+    },
+    {
+      "id": "browser-rendering-answer-policy-v1",
+      "path": "knowledge/browser-rendering-answer-policy.json",
+      "sourceUrl": "repo-local",
+      "title": "Browser Rendering answer policy",
+      "tags": [
+        "browser-rendering",
+        "answer-policy",
+        "hardening"
+      ]
+    },
+    {
+      "id": "browser-rendering-endpoint-selection-v1",
+      "path": "knowledge/browser-rendering-endpoint-selection.json",
+      "sourceUrl": "repo-local",
+      "title": "Browser Rendering endpoint selection guidance",
+      "tags": [
+        "browser-rendering",
+        "endpoint-selection",
+        "hardening"
+      ]
+    }
+  ]
+}

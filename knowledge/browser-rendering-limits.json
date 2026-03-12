@@ -1,0 +1,65 @@
+{
+  "id": "browser-rendering-limits-v1",
+  "type": "doc",
+  "version": "v1",
+  "source": {
+    "urls": [
+      "https://developers.cloudflare.com/browser-rendering/limits",
+      "https://developers.cloudflare.com/browser-rendering/reference/timeouts",
+      "https://developers.cloudflare.com/browser-rendering/puppeteer"
+    ],
+    "title": "Limits and constraints · Cloudflare Browser Rendering docs",
+    "acquisition": "overview artifact plus targeted Context7 doc query against /websites/developers_cloudflare_browser-rendering",
+    "capturedAt": "2026-03-11"
+  },
+  "tags": [
+    "cloudflare",
+    "browser-rendering",
+    "limits",
+    "constraints",
+    "timeouts",
+    "concurrency"
+  ],
+  "summary": "Browser Rendering has explicit limits and timeout behavior, and the account-level session budget is not infinite. The correct operator posture is reuse-first, targeted, and skeptical of brute-force reruns.",
+  "content": {
+    "documented": {
+      "signals": [
+        "The Browser Rendering docs include dedicated Limits and REST API timeouts pages.",
+        "The Puppeteer docs expose a limits object with activeSessions, allowedBrowserAcquisitions, maxConcurrentSessions, and timeUntilNextAllowedBrowserAcquisition."
+      ],
+      "exampleLimitShape": {
+        "activeSessions": [
+          {
+            "id": "session-id"
+          }
+        ],
+        "allowedBrowserAcquisitions": 1,
+        "maxConcurrentSessions": 2,
+        "timeUntilNextAllowedBrowserAcquisition": 0
+      }
+    },
+    "observed": {
+      "repoBehavior": [
+        "Repeated create attempts can become the wrong move faster than the optimistic plan says they should.",
+        "The repo workflow already benefits from staging and reusing a successful crawl artifact instead of blindly creating a new job."
+      ],
+      "certaintyNote": "These are repo-level operating observations, not claims about undocumented Cloudflare numeric ceilings."
+    },
+    "practicalGuidance": [
+      "Concurrency is account-bounded; new browser acquisition can be temporarily blocked even when the workflow is otherwise valid.",
+      "Timeouts are a first-class part of the REST API surface and should be treated as normal operating constraints, not edge cases.",
+      "Beta endpoints and crawl-heavy runs deserve extra skepticism because rate/limit weirdness is real, not imaginary busywork.",
+      "Reuse successful local crawl outputs before reissuing create calls.",
+      "Prefer targeted acquisition over broad reruns when building tracked knowledge.",
+      "Keep the tracked corpus concise so it reflects known-good facts instead of padded speculation."
+    ]
+  },
+  "cleaning": {
+    "removed": [
+      "plan-specific commentary",
+      "non-limit product marketing",
+      "SDK examples unrelated to limits"
+    ],
+    "notes": "This file is intentionally conservative. It separates documented signals, repo-observed behavior, and practical guidance so undocumented numeric ceilings do not get smuggled in as facts."
+  }
+}

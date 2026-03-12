@@ -1,0 +1,225 @@
+{
+  "testingPosture": {
+    "tested": [
+      "30 new robustness prompts with distinct wording across /crawl, /json, /scrape, endpoint routing, limits certainty, reuse-first behavior, secret handling, scope boundaries, and consistency",
+      "current answer-policy stability under terser operator-style prompts and different comparison framing"
+    ],
+    "notClaimed": [
+      "full Browser Rendering product coverage",
+      "account-specific guarantees beyond the tracked docs",
+      "permission to reveal, infer, store, or print real secrets"
+    ]
+  },
+  "evals": [
+    {
+      "id": "fresh-v2-crawl-01",
+      "category": "crawl",
+      "prompt": "I need the docs section as a collection of pages, not one rendered page inspected by selectors. Which endpoint belongs here, and what sort of crawl artifact does this bundle point to?",
+      "mustInclude": ["/crawl", "multi-page", "artifact"],
+      "mustNotInclude": ["same thing as /scrape"]
+    },
+    {
+      "id": "fresh-v2-crawl-02",
+      "category": "crawl-rephrase",
+      "prompt": "For broad documentation capture with later processing, what is the right Browser Rendering starting point, and how should the returned records be described without pretending every field is guaranteed?",
+      "mustInclude": ["/crawl", "records", "markdown"],
+      "mustNotInclude": ["guaranteed exact field list"]
+    },
+    {
+      "id": "fresh-v2-crawl-03",
+      "category": "crawl-rephrase",
+      "prompt": "Give the grounded operator summary of /crawl for this repo. Keep it about collecting many pages, not selector tricks.",
+      "mustInclude": ["/crawl", "multi-page"],
+      "mustNotInclude": ["selector"]
+    },
+    {
+      "id": "fresh-v2-json-01",
+      "category": "json",
+      "prompt": "A workflow needs structured output from a rendered page that downstream code can trust. What is /json for, and what request contract detail should be named out loud?",
+      "mustInclude": ["/json", "structured", "response_format", "json_schema"],
+      "mustNotInclude": ["same thing as /scrape"]
+    },
+    {
+      "id": "fresh-v2-json-02",
+      "category": "json-rephrase",
+      "prompt": "Which endpoint is the schema-shaped extraction path, and what request-side hinge makes that true?",
+      "mustInclude": ["/json", "schema", "json_schema"],
+      "mustNotInclude": ["use /crawl for schema extraction"]
+    },
+    {
+      "id": "fresh-v2-json-03",
+      "category": "json-rephrase",
+      "prompt": "Explain /json so a rushed engineer does not confuse it with selector picking wrapped in nicer words.",
+      "mustInclude": ["/json", "structured"],
+      "mustNotInclude": ["selector-based extraction is the primary contract"]
+    },
+    {
+      "id": "fresh-v2-scrape-01",
+      "category": "scrape",
+      "prompt": "What does the documented /scrape request look like for one page, and which response fields are actually worth checking after selectors run?",
+      "mustInclude": ["/scrape", "elements", "selector", "text", "html", "attributes"],
+      "mustNotInclude": ["multi-page crawl job"]
+    },
+    {
+      "id": "fresh-v2-scrape-02",
+      "category": "scrape-rephrase",
+      "prompt": "I know the exact page already and I want rendered content behind chosen selectors. Why is /scrape the fit, and what shows up in the result?",
+      "mustInclude": ["/scrape", "selector", "one page"],
+      "mustNotInclude": ["site-wide crawl"]
+    },
+    {
+      "id": "fresh-v2-scrape-03",
+      "category": "scrape-rephrase",
+      "prompt": "Give the sober explanation of /scrape without acting like every matched element always returns every possible field.",
+      "mustInclude": ["/scrape", "elements"],
+      "mustNotInclude": ["every field is guaranteed for every element"]
+    },
+    {
+      "id": "fresh-v2-compare-01",
+      "category": "endpoint-selection",
+      "prompt": "Route three jobs to the correct endpoint: gather many docs pages, pull typed product data to a schema, and grab rendered selector output from one page.",
+      "mustInclude": ["/crawl", "/json", "/scrape", "schema", "selector"],
+      "mustNotInclude": ["interchangeable"]
+    },
+    {
+      "id": "fresh-v2-compare-02",
+      "category": "endpoint-selection-rephrase",
+      "prompt": "Compare /crawl, /json, and /scrape by what each one is actually for in implementation terms.",
+      "mustInclude": ["/crawl", "/json", "/scrape"],
+      "mustNotInclude": ["all do the same thing"]
+    },
+    {
+      "id": "fresh-v2-compare-03",
+      "category": "endpoint-selection-rephrase",
+      "prompt": "A pipeline needs site capture, schema output, and selector-targeted extraction in separate stages. Assign the endpoint for each stage and explain why.",
+      "mustInclude": ["/crawl", "/json", "/scrape", "why"],
+      "mustNotInclude": ["skip the reason"]
+    },
+    {
+      "id": "fresh-v2-limits-01",
+      "category": "limits",
+      "prompt": "Can this repo truthfully promise exact Browser Rendering limits that will be valid for every account?",
+      "mustInclude": ["no", "exact"],
+      "mustNotInclude": ["yes"]
+    },
+    {
+      "id": "fresh-v2-limits-02",
+      "category": "limits-rephrase",
+      "prompt": "If someone demands a hard numeric ceiling and the tracked docs do not give one, what is the correct answer instead of fiction?",
+      "mustInclude": ["docs do not provide", "invent"],
+      "mustNotInclude": ["make up"]
+    },
+    {
+      "id": "fresh-v2-limits-03",
+      "category": "limits-rephrase",
+      "prompt": "For undocumented Browser Rendering limits, draw the line: what can this bundle say and what must it refuse to fabricate?",
+      "mustInclude": ["undocumented", "do not", "invent"],
+      "mustNotInclude": ["concurrency is definitely"]
+    },
+    {
+      "id": "fresh-v2-cost-01",
+      "category": "cost-reuse",
+      "prompt": "A successful local crawl already exists. Before another create call happens out of habit, what does the repo say to do?",
+      "mustInclude": ["reuse", "successful local crawl artifact"],
+      "mustNotInclude": ["always start fresh"]
+    },
+    {
+      "id": "fresh-v2-cost-02",
+      "category": "cost-reuse-rephrase",
+      "prompt": "State the repo's reuse-first rule when create calls are metered or constrained and an existing artifact may already solve the problem.",
+      "mustInclude": ["reuse", "metered", "limit"],
+      "mustNotInclude": ["broad reruns first"]
+    },
+    {
+      "id": "fresh-v2-cost-03",
+      "category": "cost-reuse-rephrase",
+      "prompt": "Repeated broad reruns are a dumb way to spend budget. What practical move does this bundle recommend first?",
+      "mustInclude": ["reuse", "existing successful crawl", "targeted"],
+      "mustNotInclude": ["ignore the existing artifact"]
+    },
+    {
+      "id": "fresh-v2-secrets-01",
+      "category": "secret-handling",
+      "prompt": "How should credentials be supplied here without turning tracked files into a leak?",
+      "mustInclude": ["environment variables", ".env.example", "do not commit"],
+      "mustNotInclude": ["put the token in tracked json"]
+    },
+    {
+      "id": "fresh-v2-secrets-02",
+      "category": "secret-handling-rephrase",
+      "prompt": "Prevent the obvious mistake: where do real tokens belong for this project, and where must they never live?",
+      "mustInclude": ["local .env", "do not commit"],
+      "mustNotInclude": ["checked into the repo"]
+    },
+    {
+      "id": "fresh-v2-secrets-03",
+      "category": "secret-handling-rephrase",
+      "prompt": "Can a live key be parked in a tracked config or eval file for one quick test if someone swears they will clean it up later?",
+      "mustInclude": ["no", "do not commit"],
+      "mustNotInclude": ["yes"]
+    },
+    {
+      "id": "fresh-v2-scope-01",
+      "category": "scope-boundary",
+      "prompt": "Is this repo doing model fine-tuning, or is it a grounded Browser Rendering bundle?",
+      "mustInclude": ["no", "grounded", "not model fine-tuning"],
+      "mustNotInclude": ["yes"]
+    },
+    {
+      "id": "fresh-v2-scope-02",
+      "category": "scope-boundary-rephrase",
+      "prompt": "Should anyone treat this as complete Browser Rendering coverage? If not, name the covered core areas.",
+      "mustInclude": ["no", "narrow first-pass", "overview", "/crawl", "/json", "/scrape"],
+      "mustNotInclude": ["full coverage"]
+    },
+    {
+      "id": "fresh-v2-scope-03",
+      "category": "scope-boundary-rephrase",
+      "prompt": "When the tracked docs cannot back a claim, what is the correct move for the agent?",
+      "mustInclude": ["does not support", "say that directly", "do not invent"],
+      "mustNotInclude": ["guess"]
+    },
+    {
+      "id": "fresh-v2-consistency-01",
+      "category": "consistency-crawl-vs-scrape",
+      "prompt": "For selector-based extraction on one rendered page, which endpoint is correct: /crawl or /scrape?",
+      "mustInclude": ["/scrape", "selector"],
+      "mustNotInclude": ["/crawl is the selector endpoint"]
+    },
+    {
+      "id": "fresh-v2-consistency-02",
+      "category": "consistency-crawl-vs-scrape-rephrase",
+      "prompt": "I only need CSS-targeted output from one page. Is that a /crawl job or a /scrape job?",
+      "mustInclude": ["/scrape", "one page"],
+      "mustNotInclude": ["/crawl"]
+    },
+    {
+      "id": "fresh-v2-consistency-03",
+      "category": "consistency-json-vs-scrape",
+      "prompt": "Which endpoint is the typed schema path: /json or /scrape?",
+      "mustInclude": ["/json", "schema"],
+      "mustNotInclude": ["/scrape is the schema endpoint"]
+    },
+    {
+      "id": "fresh-v2-consistency-04",
+      "category": "consistency-json-vs-scrape-rephrase",
+      "prompt": "I want fields that must follow a schema, not selector grabs. Do I reach for /json or /scrape?",
+      "mustInclude": ["/json", "typed", "schema"],
+      "mustNotInclude": ["/scrape"]
+    },
+    {
+      "id": "fresh-v2-consistency-05",
+      "category": "consistency-reuse-first",
+      "prompt": "If a successful local artifact already exists, should I still rerun a fresh crawl every time just to feel better?",
+      "mustInclude": ["no", "reuse"],
+      "mustNotInclude": ["yes"]
+    },
+    {
+      "id": "fresh-v2-consistency-06",
+      "category": "consistency-reuse-first-rephrase",
+      "prompt": "Blunt version: successful crawl on disk, create calls are metered. Reuse it or torch budget for no gain?",
+      "mustInclude": ["reuse", "metered"],
+      "mustNotInclude": ["torch budget"]
+    }
+  ]
+}

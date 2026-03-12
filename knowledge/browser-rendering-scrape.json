@@ -1,0 +1,83 @@
+{
+  "id": "browser-rendering-scrape-v1",
+  "type": "doc",
+  "version": "v1",
+  "source": {
+    "url": "https://developers.cloudflare.com/browser-rendering/rest-api/scrape-endpoint",
+    "title": "Scrape endpoint · Cloudflare Browser Rendering docs",
+    "acquisition": "targeted Context7 doc query against /websites/developers_cloudflare_browser-rendering",
+    "capturedAt": "2026-03-11"
+  },
+  "tags": [
+    "cloudflare",
+    "browser-rendering",
+    "rest-api",
+    "scrape",
+    "selectors"
+  ],
+  "summary": "The /scrape endpoint extracts information for specific CSS selectors from a rendered page. It is the direct selector-driven option when /json would be overkill or too fuzzy.",
+  "content": {
+    "purpose": [
+      "Use /scrape to capture targeted elements after Browser Rendering loads the page.",
+      "Best fit: precise selector-based extraction with geometry, text, HTML, and attributes."
+    ],
+    "endpoint": {
+      "method": "POST",
+      "path": "/accounts/<accountId>/browser-rendering/scrape"
+    },
+    "documentedRequest": {
+      "fields": [
+        "url: target page URL.",
+        "elements: array of selector objects such as { selector: 'h1' }.",
+        "gotoOptions.waitUntil: optional page-load strategy.",
+        "userAgent: optional custom user agent."
+      ],
+      "example": {
+        "url": "https://example.com/",
+        "elements": [
+          {
+            "selector": "h1"
+          },
+          {
+            "selector": "a"
+          }
+        ]
+      }
+    },
+    "documentedResponsePattern": {
+      "topLevel": [
+        "success",
+        "result"
+      ],
+      "resultEntry": {
+        "selector": "h1",
+        "results": [
+          {
+            "text": "Example heading",
+            "html": "<h1>Example heading</h1>",
+            "attributes": {
+              "class": "hero-title"
+            },
+            "height": 40,
+            "width": 320,
+            "top": 120,
+            "left": 24
+          }
+        ]
+      },
+      "certaintyNote": "This represents the documented response pattern at a useful level. It is not a claim that every field is always present for every element."
+    },
+    "practicalNotes": [
+      "The endpoint returns positional data, which is useful when downstream tasks care about layout as well as content.",
+      "If selectors are brittle or page intent matters more than exact DOM targeting, Stagehand or the /json endpoint may be the less painful move."
+    ]
+  },
+  "cleaning": {
+    "removed": [
+      "full example payloads",
+      "SDK duplication",
+      "surrounding docs chrome"
+    ],
+    "notes": "This is a compact operational summary of the documented request and response pattern, with the response shape shown as representative rather than pretending every field is universally guaranteed."
+  }
+}

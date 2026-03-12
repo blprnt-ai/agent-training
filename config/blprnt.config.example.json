@@ -1,0 +1,26 @@
+{
+  "runtime": "blprnt",
+  "agentFile": "agent/cloudflare-browser-rendering-agent.json",
+  "environment": {
+    "CLOUDFLARE_API_TOKEN": "YOUR_CLOUDFLARE_API_TOKEN_HERE",
+    "CLOUDFLARE_ACCOUNT_ID": "YOUR_CLOUDFLARE_ACCOUNT_ID_HERE"
+  },
+  "training": {
+    "knowledgeIndex": "knowledge/index.json",
+    "sourceUrl": "https://developers.cloudflare.com/browser-rendering/",
+    "crawlScopeFile": "config/crawl-scope.json",
+    "mode": "grounded-agent-bundle",
+    "source": "links",
+    "formats": [
+      "markdown"
+    ],
+    "render": false,
+    "notes": [
+      "The shipped agent answers Browser Rendering questions about overview, /crawl, /json, /scrape, and limits/constraints.",
+      "Use blprnt as the primary orchestrator after your own model/runtime setup; this bundle does not add a separate blprnt credential field.",
+      "Other runtimes can adapt these files manually, but no drop-in adapter is included or tested.",
+      "This config is for grounded retrieval/training workflows in blprnt, not model fine-tuning.",
+      "Reuse successful crawl artifacts before creating new jobs when limits or cost matter."
+    ]
+  }
+}

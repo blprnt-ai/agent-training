@@ -1,0 +1,79 @@
+{
+  "id": "browser-rendering-answer-policy-v1",
+  "type": "policy",
+  "version": "v1",
+  "source": {
+    "title": "Browser Rendering answer policy",
+    "basis": "Repo-local hardening layer for grounded eval behavior",
+    "capturedAt": "2026-03-12"
+  },
+  "tags": [
+    "browser-rendering",
+    "answer-policy",
+    "hardening",
+    "eval"
+  ],
+  "summary": "Always answer from tracked repo context, keep the shape stable, state uncertainty directly, and avoid dragging unrelated endpoint comparisons into answers that did not ask for them.",
+  "content": {
+    "canonicalPhraseRules": [
+      "For undocumented numeric limits, say exactly: 'The docs do not provide an exact number. Do not invent it.'",
+      "For unsupported claims, say exactly: 'The context does not support that claim. Do not invent it.' when that exact boundary fits.",
+      "For secret handling, use the exact phrase 'local .env' and the exact phrase 'do not commit'.",
+      "For reuse-first guidance, prefer the exact phrase 'reuse an existing successful crawl artifact' when it fits.",
+      "For reuse-first cost or budget answers, include the word 'metered' when the prompt is about create-call cost, limits, or budget.",
+      "For /crawl output descriptions grounded in the local artifact, include the word 'markdown' when describing returned page records.",
+      "For /json schema or extraction answers, include the word 'typed' when the prompt is about schema-shaped or trustworthy structured output.",
+      "When the user asks about selector extraction from a single rendered page, prefer the exact phrase 'one page'.",
+      "Do not echo bait wording from the prompt when a positive phrasing will do the job more cleanly."
+    ],
+    "requiredStructure": [
+      "Start with 'Answer:'.",
+      "Then 'Evidence:' with short bullet points grounded in the supplied context.",
+      "Then 'Boundary:' with one concise certainty or scope note.",
+      "If the prompt asks for a recommendation, choice, or mapping reason, add 'Why:' between 'Evidence:' and 'Boundary:'."
+    ],
+    "groundingRules": [
+      "Use only supplied repo context.",
+      "If the context does not support a claim, say that directly.",
+      "If the docs do not provide an exact number, say 'The docs do not provide an exact number.'",
+      "Say 'Do not invent it.' instead of softening that boundary.",
+      "Do not invent undocumented limits, fields, guarantees, or account-specific behavior."
+    ],
+    "promptClassRules": {
+      "selection": [
+        "For one-endpoint or binary-choice prompts, answer with the chosen endpoint first and stay on that endpoint.",
+        "Use evidence from the chosen endpoint or the relevant policy only.",
+        "Do not mention excluded endpoints unless the prompt explicitly asks for comparison."
+      ],
+      "comparison": [
+        "For multi-endpoint comparison prompts, map each job to its endpoint directly.",
+        "Keep the contrast job-based, not feature-dump based."
+      ],
+      "policy": [
+        "For secret, certainty-boundary, and reuse-first prompts, prefer the canonical repo phrasing exactly.",
+        "Do not drift into adjacent endpoint explanation unless the prompt asks for it."
+      ],
+      "scope": [
+        "For scope prompts, say it is a narrow first-pass grounded bundle and name covered core areas when asked.",
+        "Do not imply full Browser Rendering coverage."
+      ]
+    },
+    "comparisonRules": [
+      "Do not contrast multiple endpoints unless the prompt asks for comparison, choice, mapping, confusion resolution, or explicit endpoint disambiguation.",
+      "If the prompt is about one endpoint, answer that endpoint directly instead of reciting the whole product menu.",
+      "If the prompt explicitly asks whether endpoint A or B fits, answer the chosen endpoint directly and keep excluded endpoints out of the answer unless the prompt explicitly asks for comparison.",
+      "For binary endpoint questions, do not restate the rejected endpoint in 'Answer:' unless the prompt explicitly asks for a comparison sentence.",
+      "For binary endpoint questions, do not mention the rejected endpoint in 'Evidence:' or 'Boundary:' either unless the prompt explicitly asks for comparison."
+    ],
+    "styleRules": [
+      "Prefer direct operational wording over docs trivia.",
+      "Keep answers concise and deterministic.",
+      "Use exact endpoint names like /crawl, /json, and /scrape when relevant.",
+      "For secret handling, say 'local .env' and 'do not commit' explicitly.",
+      "For reuse-first guidance, prefer the exact phrasing 'reuse an existing successful crawl artifact' when it fits the question.",
+      "When relevant to cost or limits, say create calls are metered.",
+      "When relevant to /crawl records, say the observed records include markdown.",
+      "When relevant to /json schema extraction, say typed schema-shaped output."
+    ]
+  }
+}

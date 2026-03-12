@@ -1,0 +1,225 @@
+{
+  "testingPosture": {
+    "tested": [
+      "30-prompt stress pool for endpoint choice, limits, reuse-first behavior, secret handling, and refusal boundaries",
+      "consistency across differently phrased versions of similar Browser Rendering questions"
+    ],
+    "notClaimed": [
+      "full Browser Rendering product coverage",
+      "account-specific guarantees beyond the tracked docs",
+      "permission to reveal or infer real secrets"
+    ]
+  },
+  "evals": [
+    {
+      "id": "stress-crawl-01",
+      "category": "crawl",
+      "prompt": "When should someone pick Browser Rendering /crawl, and what kind of output should they expect from the docs?",
+      "mustInclude": ["/crawl", "multi-page", "markdown"],
+      "mustNotInclude": ["same thing as /scrape"]
+    },
+    {
+      "id": "stress-crawl-02",
+      "category": "crawl-rephrase",
+      "prompt": "I need site-wide doc capture instead of one rendered page. Is /crawl the right endpoint, and what does the repo actually say about the returned artifact shape?",
+      "mustInclude": ["/crawl", "site-wide", "artifact"],
+      "mustNotInclude": ["guaranteed exact field list"]
+    },
+    {
+      "id": "stress-crawl-03",
+      "category": "crawl-rephrase",
+      "prompt": "Give me the practical case for /crawl in this bundle without pretending it is a single-page selector extractor.",
+      "mustInclude": ["/crawl", "multi-page"],
+      "mustNotInclude": ["selector extractor", "single-page only"]
+    },
+    {
+      "id": "stress-json-01",
+      "category": "json",
+      "prompt": "What is Browser Rendering /json for, and what request feature should a grounded answer mention?",
+      "mustInclude": ["/json", "structured", "response_format", "json_schema"],
+      "mustNotInclude": ["same thing as /scrape"]
+    },
+    {
+      "id": "stress-json-02",
+      "category": "json-rephrase",
+      "prompt": "If I want schema-shaped extraction from a rendered page, which endpoint fits, and what contract detail matters most?",
+      "mustInclude": ["/json", "schema", "json_schema"],
+      "mustNotInclude": ["use /crawl for schema extraction"]
+    },
+    {
+      "id": "stress-json-03",
+      "category": "json-rephrase",
+      "prompt": "Summarize /json like you are stopping someone from confusing it with selector scraping.",
+      "mustInclude": ["/json", "structured"],
+      "mustNotInclude": ["selector-based extraction is the primary contract"]
+    },
+    {
+      "id": "stress-scrape-01",
+      "category": "scrape",
+      "prompt": "Describe the documented Browser Rendering /scrape request and the response fields users should expect to inspect.",
+      "mustInclude": ["/scrape", "elements", "selector", "text", "html", "attributes"],
+      "mustNotInclude": ["multi-page crawl job"]
+    },
+    {
+      "id": "stress-scrape-02",
+      "category": "scrape-rephrase",
+      "prompt": "I just need rendered selectors from one page. Explain why /scrape fits and what comes back.",
+      "mustInclude": ["/scrape", "selector", "one page"],
+      "mustNotInclude": ["site-wide crawl"]
+    },
+    {
+      "id": "stress-scrape-03",
+      "category": "scrape-rephrase",
+      "prompt": "Give the short version of /scrape without hallucinating that every element always returns every field.",
+      "mustInclude": ["/scrape", "elements"],
+      "mustNotInclude": ["every field is guaranteed for every element"]
+    },
+    {
+      "id": "stress-compare-01",
+      "category": "endpoint-selection",
+      "prompt": "Choose the right endpoint for three jobs: multi-page docs capture, schema-shaped product extraction, and grabbing specific rendered selectors from one page.",
+      "mustInclude": ["/crawl", "/json", "/scrape", "schema", "selector"],
+      "mustNotInclude": ["interchangeable"]
+    },
+    {
+      "id": "stress-compare-02",
+      "category": "endpoint-selection-rephrase",
+      "prompt": "Compare /crawl, /json, and /scrape by job type instead of reciting docs trivia.",
+      "mustInclude": ["/crawl", "/json", "/scrape"],
+      "mustNotInclude": ["all do the same thing"]
+    },
+    {
+      "id": "stress-compare-03",
+      "category": "endpoint-selection-rephrase",
+      "prompt": "I have three tasks: crawl docs, extract typed fields, and pull CSS-selected content. Map each to the endpoint and explain why.",
+      "mustInclude": ["/crawl", "/json", "/scrape", "why"],
+      "mustNotInclude": ["skip the reason"]
+    },
+    {
+      "id": "stress-limits-01",
+      "category": "limits",
+      "prompt": "Can this repo guarantee exact numeric Browser Rendering ceilings for every account?",
+      "mustInclude": ["no", "exact numeric"],
+      "mustNotInclude": ["yes"]
+    },
+    {
+      "id": "stress-limits-02",
+      "category": "limits-rephrase",
+      "prompt": "What should the agent say when the docs do not provide a Browser Rendering number for a limit?",
+      "mustInclude": ["docs do not provide", "invent"],
+      "mustNotInclude": ["make up"]
+    },
+    {
+      "id": "stress-limits-03",
+      "category": "limits-rephrase",
+      "prompt": "Do not give me fantasy ceilings. State the repo's actual certainty boundary for undocumented Browser Rendering limits.",
+      "mustInclude": ["undocumented", "do not", "invent"],
+      "mustNotInclude": ["concurrency is definitely"]
+    },
+    {
+      "id": "stress-cost-01",
+      "category": "cost-reuse",
+      "prompt": "Before starting a fresh crawl, what should a contributor do if a successful local crawl artifact already exists?",
+      "mustInclude": ["reuse", "successful local crawl artifact"],
+      "mustNotInclude": ["always start fresh"]
+    },
+    {
+      "id": "stress-cost-02",
+      "category": "cost-reuse-rephrase",
+      "prompt": "What is the repo's reuse-first behavior for metered or limit-bound Browser Rendering create calls?",
+      "mustInclude": ["reuse", "metered", "limit"],
+      "mustNotInclude": ["broad reruns first"]
+    },
+    {
+      "id": "stress-cost-03",
+      "category": "cost-reuse-rephrase",
+      "prompt": "If create calls are getting expensive or rate-limited, what practical move does this bundle recommend before rerunning?",
+      "mustInclude": ["reuse", "existing successful crawl", "targeted"],
+      "mustNotInclude": ["ignore the existing artifact"]
+    },
+    {
+      "id": "stress-secrets-01",
+      "category": "secret-handling",
+      "prompt": "How should contributors provide API credentials for this repo without doing something stupid?",
+      "mustInclude": ["environment variables", ".env.example", "do not commit"],
+      "mustNotInclude": ["put the token in tracked json"]
+    },
+    {
+      "id": "stress-secrets-02",
+      "category": "secret-handling-rephrase",
+      "prompt": "Where do real tokens belong for this project, and where do they absolutely not belong?",
+      "mustInclude": ["local .env", "do not commit"],
+      "mustNotInclude": ["checked into the repo"]
+    },
+    {
+      "id": "stress-secrets-03",
+      "category": "secret-handling-rephrase",
+      "prompt": "Can I paste a live API key into a tracked config or eval file if I promise to delete it later?",
+      "mustInclude": ["no", "do not commit"],
+      "mustNotInclude": ["yes"]
+    },
+    {
+      "id": "stress-scope-01",
+      "category": "scope-boundary",
+      "prompt": "Does this repo fine-tune model weights for Browser Rendering knowledge?",
+      "mustInclude": ["no", "grounded", "not model fine-tuning"],
+      "mustNotInclude": ["yes"]
+    },
+    {
+      "id": "stress-scope-02",
+      "category": "scope-boundary-rephrase",
+      "prompt": "Can this bundle answer every Browser Rendering endpoint question with full product coverage?",
+      "mustInclude": ["no", "narrow first-pass", "overview", "/crawl", "/json", "/scrape"],
+      "mustNotInclude": ["full coverage"]
+    },
+    {
+      "id": "stress-scope-03",
+      "category": "scope-boundary-rephrase",
+      "prompt": "If the tracked docs bundle does not support a claim, what should the agent do?",
+      "mustInclude": ["does not support", "say that directly", "do not invent"],
+      "mustNotInclude": ["guess"]
+    },
+    {
+      "id": "stress-consistency-01",
+      "category": "consistency-crawl-vs-scrape",
+      "prompt": "Which endpoint is for selector-based extraction from one rendered page: /crawl or /scrape?",
+      "mustInclude": ["/scrape", "selector"],
+      "mustNotInclude": ["/crawl is the selector endpoint"]
+    },
+    {
+      "id": "stress-consistency-02",
+      "category": "consistency-crawl-vs-scrape-rephrase",
+      "prompt": "I only need CSS-selected content from one page. Tell me whether that is /crawl or /scrape.",
+      "mustInclude": ["/scrape", "one page"],
+      "mustNotInclude": ["/crawl"]
+    },
+    {
+      "id": "stress-consistency-03",
+      "category": "consistency-json-vs-scrape",
+      "prompt": "Which endpoint is the schema-shaped one: /json or /scrape?",
+      "mustInclude": ["/json", "schema"],
+      "mustNotInclude": ["/scrape is the schema endpoint"]
+    },
+    {
+      "id": "stress-consistency-04",
+      "category": "consistency-json-vs-scrape-rephrase",
+      "prompt": "I want typed fields that follow a schema, not selector grabs. Is that /json or /scrape?",
+      "mustInclude": ["/json", "typed", "schema"],
+      "mustNotInclude": ["/scrape"]
+    },
+    {
+      "id": "stress-consistency-05",
+      "category": "consistency-reuse-first",
+      "prompt": "Should I rerun a fresh crawl every time just to be safe, even if a successful local artifact already exists?",
+      "mustInclude": ["no", "reuse"],
+      "mustNotInclude": ["yes"]
+    },
+    {
+      "id": "stress-consistency-06",
+      "category": "consistency-reuse-first-rephrase",
+      "prompt": "Same question, less politely: existing successful crawl on disk, create calls are metered. Do I reuse it or waste money?",
+      "mustInclude": ["reuse", "metered"],
+      "mustNotInclude": ["waste money"]
+    }
+  ]
+}

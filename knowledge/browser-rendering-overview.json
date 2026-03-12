@@ -1,0 +1,88 @@
+{
+  "id": "browser-rendering-overview-v1",
+  "type": "doc",
+  "version": "v1",
+  "source": {
+    "url": "https://developers.cloudflare.com/browser-rendering/",
+    "title": "Browser Rendering · Cloudflare Browser Rendering docs",
+    "artifact": "outputs/browser-rendering/raw/real/latest.json",
+    "crawlJobId": "redacted-local-artifact",
+    "capturedAt": "2026-03-11T20:05:15.662Z"
+  },
+  "tags": [
+    "cloudflare",
+    "browser-rendering",
+    "overview",
+    "crawl",
+    "json",
+    "scrape",
+    "playwright",
+    "puppeteer",
+    "stagehand"
+  ],
+  "summary": "Cloudflare Browser Rendering runs headless Chrome on Cloudflare's global network for browser automation, scraping, testing, and content generation. It supports REST API workflows for stateless tasks and Workers bindings for deeper browser automation with Playwright, Puppeteer, and Stagehand.",
+  "content": {
+    "overview": [
+      "Browser Rendering runs headless Chrome on Cloudflare's global network for browser automation, web scraping, testing, and content generation.",
+      "It is available on Free and Paid plans.",
+      "Developers can programmatically control and interact with headless browser instances running on Cloudflare's edge network."
+    ],
+    "useCases": [
+      "Render dynamic webpages or raw HTML.",
+      "Extract Markdown.",
+      "Capture screenshots.",
+      "Render PDFs.",
+      "Take page snapshots.",
+      "Retrieve links.",
+      "Scrape HTML elements.",
+      "Capture structured data with the JSON endpoint.",
+      "Crawl web content with the crawl endpoint."
+    ],
+    "integrationMethods": [
+      {
+        "name": "REST API",
+        "description": "Simple HTTP endpoints for stateless tasks like screenshots, PDFs, Markdown extraction, scraping, structured JSON extraction, links, snapshots, and crawling."
+      },
+      {
+        "name": "Workers Bindings",
+        "description": "Full browser automation inside Workers using Puppeteer, Playwright, or Stagehand."
+      }
+    ],
+    "recommendedPaths": [
+      "Use the REST API for simple screenshot, PDF, or scrape operations when a single HTTP request is enough.",
+      "Use Playwright for full browser automation and testing workflows.",
+      "Use Puppeteer or Playwright when porting existing scripts with minimal code changes.",
+      "Use the JSON endpoint for AI-assisted structured data extraction.",
+      "Use Playwright MCP for AI agent browsing.",
+      "Use Stagehand for resilient scraping when intent-based element targeting matters more than brittle selectors."
+    ],
+    "keyFeatures": [
+      "Scale to thousands of browsers with low cold-start time.",
+      "Run browser sessions globally on Cloudflare's edge network.",
+      "Choose between simple REST APIs and familiar automation libraries.",
+      "Reuse browser sessions across requests to reduce cold-start overhead.",
+      "Pay for browser time used, with a free tier available."
+    ],
+    "relatedProducts": [
+      "Workers for serverless execution on Cloudflare's network.",
+      "Durable Objects for persistent browser session coordination.",
+      "Agents for AI-powered website navigation via Playwright MCP or Stagehand."
+    ],
+    "nextResources": [
+      "Get started",
+      "Limits",
+      "Playwright API"
+    ]
+  },
+  "cleaning": {
+    "removed": [
+      "global docs navigation",
+      "search UI text",
+      "footer links",
+      "theme toggles",
+      "edit/issue/helpful widgets",
+      "duplicated on-page table of contents"
+    ],
+    "notes": "This first-pass tracked doc keeps the main Browser Rendering overview content and drops obvious docs chrome."
+  }
+}

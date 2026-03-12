@@ -1,0 +1,152 @@
+{
+  "testingPosture": {
+    "tested": [
+      "overview grounding",
+      "/crawl usage and artifact-shape certainty boundaries",
+      "/json purpose and schema-driven extraction",
+      "/scrape request-response pattern",
+      "endpoint comparison and selection",
+      "limits certainty and refusal behavior"
+    ],
+    "notClaimed": [
+      "full Browser Rendering endpoint coverage",
+      "unsupported numeric limit guarantees",
+      "turnkey non-blprnt runtime integrations"
+    ]
+  },
+  "demo": [
+    {
+      "id": "demo-crawl",
+      "prompt": "Explain when to use the Browser Rendering /crawl endpoint and what output shape a user should expect from the docs.",
+      "target": ["/crawl", "grounded explanation"]
+    },
+    {
+      "id": "demo-json",
+      "prompt": "Summarize what the /json endpoint is for in Browser Rendering and how it differs from page scraping workflows.",
+      "target": ["/json", "compare workflows"]
+    },
+    {
+      "id": "demo-scrape",
+      "prompt": "Describe a basic /scrape use case and the kind of extracted content a user should verify against the docs.",
+      "target": ["/scrape", "doc-grounded output"]
+    },
+    {
+      "id": "demo-limits",
+      "prompt": "Summarize the repo's limit posture for Browser Rendering runs without inventing undocumented numeric ceilings.",
+      "target": ["limits", "certainty boundaries"]
+    },
+    {
+      "id": "demo-endpoint-selection",
+      "prompt": "Compare /crawl, /json, and /scrape for site-wide capture, structured extraction, and selector-based extraction.",
+      "target": ["endpoint comparison", "use the right tool"]
+    }
+  ],
+  "evals": [
+    {
+      "id": "eval-training-scope",
+      "prompt": "What exact first-pass crawl scope should this agent use for Cloudflare Browser Rendering training?",
+      "mustInclude": [
+        "https://developers.cloudflare.com/browser-rendering/**",
+        "**/changelog/**",
+        "**/pricing/**",
+        "60",
+        "2",
+        "markdown",
+        "false"
+      ]
+    },
+    {
+      "id": "eval-secrets",
+      "prompt": "How should a contributor provide API credentials for this repo?",
+      "mustInclude": [
+        "environment variables",
+        ".env.example"
+      ]
+    },
+    {
+      "id": "eval-grounding",
+      "prompt": "If the docs do not confirm a behavior for /crawl, what should the agent do?",
+      "mustInclude": [
+        "does not support",
+        "invent"
+      ]
+    },
+    {
+      "id": "eval-fine-tuning-clarity",
+      "prompt": "Does this repo fine-tune model weights for Cloudflare Browser Rendering knowledge?",
+      "mustInclude": [
+        "no",
+        "grounded",
+        "not model fine-tuning"
+      ]
+    },
+    {
+      "id": "eval-reuse-first",
+      "prompt": "What should a contributor do before starting a fresh crawl when a successful local crawl artifact already exists?",
+      "mustInclude": [
+        "reuse",
+        "successful local crawl artifact"
+      ]
+    },
+    {
+      "id": "eval-json-contract",
+      "prompt": "What is the Browser Rendering /json endpoint for, and what request feature should the answer mention?",
+      "mustInclude": [
+        "/json",
+        "structured",
+        "response_format",
+        "json_schema"
+      ],
+      "mustNotInclude": [
+        "drop CSS selectors into /json as the primary contract",
+        "claim it is the same thing as /scrape"
+      ]
+    },
+    {
+      "id": "eval-scrape-contract",
+      "prompt": "Describe the documented Browser Rendering /scrape request and the kind of response fields a user should expect.",
+      "mustInclude": [
+        "/scrape",
+        "elements",
+        "selector",
+        "text",
+        "html",
+        "attributes"
+      ],
+      "mustNotInclude": [
+        "pretend every response field is guaranteed for every element",
+        "claim /scrape is a multi-page crawl job"
+      ]
+    },
+    {
+      "id": "eval-endpoint-selection",
+      "prompt": "Choose the right Browser Rendering endpoint for three jobs: multi-page doc capture, schema-shaped product extraction, and extracting specific rendered selectors from one page.",
+      "mustInclude": [
+        "/crawl",
+        "multi-page",
+        "/json",
+        "schema",
+        "/scrape",
+        "selector"
+      ],
+      "mustNotInclude": [
+        "say the three endpoints are interchangeable",
+        "skip the reason for the choice"
+      ]
+    },
+    {
+      "id": "eval-limits-certainty-boundary",
+      "prompt": "Can this repo guarantee exact numeric Browser Rendering ceilings for every account, and how should the agent answer when the docs do not provide a number?",
+      "mustInclude": [
+        "no",
+        "docs do not provide an exact number",
+        "invent",
+        "exact numeric"
+      ],
+      "mustNotInclude": [
+        "guarantee an exact ceiling for every account",
+        "invent a timeout or concurrency number"
+      ]
+    }
+  ]
+}

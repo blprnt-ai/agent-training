@@ -12,3 +12,13 @@ build/
 # Environment files
 .env
 .env.*
+!.env.example
+
+# Local agent/runtime state
+.blprnt/
+outputs/
+artifacts/
+logs/
+
+# Local crawl artifacts
+outputs/browser-rendering/raw/

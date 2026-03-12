@@ -1,0 +1,75 @@
+{
+  "id": "browser-rendering-crawl-v1",
+  "type": "doc",
+  "version": "v1",
+  "source": {
+    "url": "https://developers.cloudflare.com/browser-rendering/rest-api/crawl-endpoint",
+    "title": "Crawl endpoint · Cloudflare Browser Rendering docs",
+    "acquisition": "targeted Context7 doc query against /websites/developers_cloudflare_browser-rendering",
+    "capturedAt": "2026-03-11"
+  },
+  "tags": [
+    "cloudflare",
+    "browser-rendering",
+    "rest-api",
+    "crawl",
+    "beta"
+  ],
+  "summary": "The /crawl endpoint starts an asynchronous crawl job for a seed URL and returns a job that can be polled until completed. It is for multi-page content acquisition, not a one-shot page fetch.",
+  "content": {
+    "purpose": [
+      "Use /crawl when the task is multi-page content acquisition rather than a single rendered page.",
+      "The endpoint is documented as Beta in the Browser Rendering navigation."
+    ],
+    "endpoint": {
+      "method": "POST",
+      "path": "/accounts/<accountId>/browser-rendering/crawl"
+    },
+    "documentedContract": {
+      "minimumRequest": {
+        "url": "https://example.com"
+      },
+      "requestNotes": [
+        "The captured API example shows a minimal body with only a seed url.",
+        "Use Cloudflare account auth exactly as documented in the official examples."
+      ],
+      "jobLifecycle": [
+        "Create a crawl job with POST /crawl.",
+        "Poll the job with GET /crawl/<jobId>.",
+        "Delete the job with DELETE /crawl/<jobId> when cleanup is needed."
+      ]
+    },
+    "observedLocalArtifact": {
+      "sourceArtifact": "outputs/browser-rendering/raw/real/latest.json",
+      "jobFieldsSeen": [
+        "id",
+        "status",
+        "browserSecondsUsed",
+        "total",
+        "finished",
+        "skipped",
+        "cursor",
+        "records"
+      ],
+      "recordFieldsSeen": [
+        "url",
+        "status",
+        "metadata",
+        "markdown"
+      ],
+      "certaintyNote": "These fields are observed in the repo-local successful crawl artifact. Treat them as strong evidence, not a guaranteed full contract unless the docs say so."
+    },
+    "practicalGuidance": [
+      "Repo-local successful crawl output confirms completed job records contain cleaned markdown per crawled page plus status/metadata.",
+      "The real local artifact also shows heavy skip counts, so result review matters more than assuming broad coverage."
+    ]
+  },
+  "cleaning": {
+    "removed": [
+      "SDK boilerplate",
+      "auth header variations",
+      "non-crawl endpoint noise"
+    ],
+    "notes": "This is a concise tracked summary. It separates the documented request flow from fields observed in the repo-local artifact so certainty boundaries stay honest."
+  }
+}

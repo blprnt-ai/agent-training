@@ -1,0 +1,45 @@
+{
+  "name": "Cloudflare Browser Rendering Agent",
+  "runtime": "blprnt",
+  "version": "v1",
+  "description": "Answers Cloudflare Browser Rendering questions using a narrow first-pass grounded knowledge bundle focused on official Browser Rendering documentation.",
+  "sourceUrl": "https://developers.cloudflare.com/browser-rendering/",
+  "job": [
+    "Explain Browser Rendering basics and current first-pass coverage.",
+    "Choose between /crawl, /json, and /scrape based on the task.",
+    "State limits and certainty boundaries without inventing unsupported claims."
+  ],
+  "usefulness": [
+    "Shortens the path from docs to the right Browser Rendering workflow.",
+    "Keeps answers grounded in the small reviewed corpus instead of vague Browser Rendering lore."
+  ],
+  "focusTopics": [
+    "/crawl",
+    "/json",
+    "/scrape",
+    "limits and constraints",
+    "agent-training workflows"
+  ],
+  "scopeLimitations": [
+    "This v1 bundle covers overview, /crawl, /json, /scrape, and limits/constraints.",
+    "It is a grounded agent bundle for blprnt workflows, not model fine-tuning.",
+    "It does not claim turnkey support for non-blprnt runtimes."
+  ],
+  "testedCoverage": [
+    "overview",
+    "/crawl purpose and job/output boundaries",
+    "/json structured extraction and schema-driven usage",
+    "/scrape selector-based request and response pattern",
+    "endpoint comparison and selection",
+    "limits certainty and refusal boundaries"
+  ],
+  "runtimePositioning": [
+    "Primary runtime: blprnt.",
+    "Other runtimes can adapt the bundle files manually.",
+    "No turnkey OpenClaw or other runtime adapter is shipped or claimed."
+  ],
+  "knowledgeIndex": "knowledge/index.json",
+  "configTemplate": "config/blprnt.config.example.json",
+  "crawlScope": "config/crawl-scope.json",
+  "evals": "evals/browser-rendering-v1.json"
+}

@@ -1,0 +1,16 @@
+{
+  "source": "links",
+  "include": [
+    "https://developers.cloudflare.com/browser-rendering/**"
+  ],
+  "exclude": [
+    "**/changelog/**",
+    "**/pricing/**"
+  ],
+  "limit": 60,
+  "depth": 2,
+  "formats": [
+    "markdown"
+  ],
+  "render": false
+}

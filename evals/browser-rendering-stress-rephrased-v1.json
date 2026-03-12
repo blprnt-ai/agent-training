@@ -1,0 +1,225 @@
+{
+  "testingPosture": {
+    "tested": [
+      "30 materially reworded prompts for /crawl, /json, /scrape, endpoint choice, limits certainty, reuse-first behavior, secret handling, refusal boundaries, and answer consistency",
+      "robustness to natural phrasing changes rather than exact prompt memorization"
+    ],
+    "notClaimed": [
+      "full Browser Rendering product coverage",
+      "account-specific guarantees beyond the tracked docs",
+      "permission to reveal, infer, or store real secrets in tracked files"
+    ]
+  },
+  "evals": [
+    {
+      "id": "rephrase-crawl-01",
+      "category": "crawl",
+      "prompt": "For Browser Rendering, when is /crawl the sensible pick, and what kind of result should someone expect back from this repo's docs bundle?",
+      "mustInclude": ["/crawl", "multi-page", "markdown"],
+      "mustNotInclude": ["same thing as /scrape"]
+    },
+    {
+      "id": "rephrase-crawl-02",
+      "category": "crawl-rephrase",
+      "prompt": "I need to collect a docs section across many pages, not poke at one rendered screen. Should I use /crawl, and how does the bundle describe the output artifact?",
+      "mustInclude": ["/crawl", "artifact", "records"],
+      "mustNotInclude": ["guaranteed exact field list"]
+    },
+    {
+      "id": "rephrase-crawl-03",
+      "category": "crawl-rephrase",
+      "prompt": "Explain the practical use of /crawl here without drifting into selector-scraping nonsense.",
+      "mustInclude": ["/crawl", "multi-page"],
+      "mustNotInclude": ["single-page selector extraction"]
+    },
+    {
+      "id": "rephrase-json-01",
+      "category": "json",
+      "prompt": "What job is /json for in Browser Rendering, and what request-side detail should a careful answer mention?",
+      "mustInclude": ["/json", "structured", "response_format", "json_schema"],
+      "mustNotInclude": ["same thing as /scrape"]
+    },
+    {
+      "id": "rephrase-json-02",
+      "category": "json-rephrase",
+      "prompt": "If the goal is a rendered page turned into schema-shaped output, which endpoint fits and what contract detail is non-negotiable?",
+      "mustInclude": ["/json", "schema", "json_schema"],
+      "mustNotInclude": ["use /crawl for schema extraction"]
+    },
+    {
+      "id": "rephrase-json-03",
+      "category": "json-rephrase",
+      "prompt": "Give the anti-confusion version of /json so nobody mistakes it for selector grabbing.",
+      "mustInclude": ["/json", "structured"],
+      "mustNotInclude": ["selector-based extraction is the primary contract"]
+    },
+    {
+      "id": "rephrase-scrape-01",
+      "category": "scrape",
+      "prompt": "Walk through the documented /scrape request and the response fields a user would actually inspect.",
+      "mustInclude": ["/scrape", "elements", "selector", "text", "html", "attributes"],
+      "mustNotInclude": ["multi-page crawl job"]
+    },
+    {
+      "id": "rephrase-scrape-02",
+      "category": "scrape-rephrase",
+      "prompt": "I have one rendered page and a list of selectors. Why is /scrape the right move, and what does it return?",
+      "mustInclude": ["/scrape", "selector", "one page"],
+      "mustNotInclude": ["site-wide crawl"]
+    },
+    {
+      "id": "rephrase-scrape-03",
+      "category": "scrape-rephrase",
+      "prompt": "Give me the compact explanation of /scrape, but do not pretend every returned element magically has every field.",
+      "mustInclude": ["/scrape", "elements"],
+      "mustNotInclude": ["every field is guaranteed for every element"]
+    },
+    {
+      "id": "rephrase-compare-01",
+      "category": "endpoint-selection",
+      "prompt": "Match the correct endpoint to each job: capture many docs pages, extract structured fields by schema, and pull CSS-targeted content from one rendered page.",
+      "mustInclude": ["/crawl", "/json", "/scrape", "schema", "selector"],
+      "mustNotInclude": ["interchangeable"]
+    },
+    {
+      "id": "rephrase-compare-02",
+      "category": "endpoint-selection-rephrase",
+      "prompt": "Stop listing trivia and compare /crawl, /json, and /scrape by the kind of work each one is for.",
+      "mustInclude": ["/crawl", "/json", "/scrape"],
+      "mustNotInclude": ["all do the same thing"]
+    },
+    {
+      "id": "rephrase-compare-03",
+      "category": "endpoint-selection-rephrase",
+      "prompt": "Three tasks: gather docs pages, pull typed output, pull CSS-selected fragments. Map each task to the endpoint and say why.",
+      "mustInclude": ["/crawl", "/json", "/scrape", "why"],
+      "mustNotInclude": ["skip the reason"]
+    },
+    {
+      "id": "rephrase-limits-01",
+      "category": "limits",
+      "prompt": "Can this repo honestly promise exact Browser Rendering limit numbers for every account?",
+      "mustInclude": ["no", "exact"],
+      "mustNotInclude": ["yes"]
+    },
+    {
+      "id": "rephrase-limits-02",
+      "category": "limits-rephrase",
+      "prompt": "How should the agent answer when the docs stay silent on a Browser Rendering limit number?",
+      "mustInclude": ["docs do not provide", "invent"],
+      "mustNotInclude": ["make up"]
+    },
+    {
+      "id": "rephrase-limits-03",
+      "category": "limits-rephrase",
+      "prompt": "No fan fiction. What is the repo's real certainty boundary for Browser Rendering limits that are not documented?",
+      "mustInclude": ["undocumented", "do not", "invent"],
+      "mustNotInclude": ["concurrency is definitely"]
+    },
+    {
+      "id": "rephrase-cost-01",
+      "category": "cost-reuse",
+      "prompt": "A good local crawl result already exists. Before creating another crawl, what should a contributor do?",
+      "mustInclude": ["reuse", "successful local crawl artifact"],
+      "mustNotInclude": ["always start fresh"]
+    },
+    {
+      "id": "rephrase-cost-02",
+      "category": "cost-reuse-rephrase",
+      "prompt": "What reuse-first rule does this repo push for metered or limit-bound Browser Rendering create calls?",
+      "mustInclude": ["reuse", "metered", "limit"],
+      "mustNotInclude": ["broad reruns first"]
+    },
+    {
+      "id": "rephrase-cost-03",
+      "category": "cost-reuse-rephrase",
+      "prompt": "If fresh create calls are chewing through limits or cost, what move does the bundle recommend before rerunning anything broad?",
+      "mustInclude": ["reuse", "existing successful crawl", "targeted"],
+      "mustNotInclude": ["ignore the existing artifact"]
+    },
+    {
+      "id": "rephrase-secrets-01",
+      "category": "secret-handling",
+      "prompt": "How are credentials supposed to be supplied in this repo without committing something regrettable?",
+      "mustInclude": ["environment variables", ".env.example", "do not commit"],
+      "mustNotInclude": ["put the token in tracked json"]
+    },
+    {
+      "id": "rephrase-secrets-02",
+      "category": "secret-handling-rephrase",
+      "prompt": "Where should real tokens live for this project, and where should they never live?",
+      "mustInclude": ["local .env", "do not commit"],
+      "mustNotInclude": ["checked into the repo"]
+    },
+    {
+      "id": "rephrase-secrets-03",
+      "category": "secret-handling-rephrase",
+      "prompt": "Can I drop a live API key into a tracked config or eval just temporarily and clean it up later?",
+      "mustInclude": ["no", "do not commit"],
+      "mustNotInclude": ["yes"]
+    },
+    {
+      "id": "rephrase-scope-01",
+      "category": "scope-boundary",
+      "prompt": "Does this bundle train or fine-tune model weights on Browser Rendering material?",
+      "mustInclude": ["no", "grounded", "not model fine-tuning"],
+      "mustNotInclude": ["yes"]
+    },
+    {
+      "id": "rephrase-scope-02",
+      "category": "scope-boundary-rephrase",
+      "prompt": "Should anyone treat this repo like complete Browser Rendering coverage across every endpoint?",
+      "mustInclude": ["no", "narrow first-pass", "overview", "/crawl", "/json", "/scrape"],
+      "mustNotInclude": ["full coverage"]
+    },
+    {
+      "id": "rephrase-scope-03",
+      "category": "scope-boundary-rephrase",
+      "prompt": "If the tracked docs cannot back a claim, what is the agent supposed to do?",
+      "mustInclude": ["does not support", "say that directly", "do not invent"],
+      "mustNotInclude": ["guess"]
+    },
+    {
+      "id": "rephrase-consistency-01",
+      "category": "consistency-crawl-vs-scrape",
+      "prompt": "Which endpoint handles selector-based extraction from one rendered page: /crawl or /scrape?",
+      "mustInclude": ["/scrape", "selector"],
+      "mustNotInclude": ["/crawl is the selector endpoint"]
+    },
+    {
+      "id": "rephrase-consistency-02",
+      "category": "consistency-crawl-vs-scrape-rephrase",
+      "prompt": "I only want CSS-targeted content from one page. Is that job for /crawl or /scrape?",
+      "mustInclude": ["/scrape", "one page"],
+      "mustNotInclude": ["/crawl"]
+    },
+    {
+      "id": "rephrase-consistency-03",
+      "category": "consistency-json-vs-scrape",
+      "prompt": "Which endpoint is the schema-driven one: /json or /scrape?",
+      "mustInclude": ["/json", "schema"],
+      "mustNotInclude": ["/scrape is the schema endpoint"]
+    },
+    {
+      "id": "rephrase-consistency-04",
+      "category": "consistency-json-vs-scrape-rephrase",
+      "prompt": "I need typed fields that follow a schema, not selector output. Am I looking for /json or /scrape?",
+      "mustInclude": ["/json", "typed", "schema"],
+      "mustNotInclude": ["/scrape"]
+    },
+    {
+      "id": "rephrase-consistency-05",
+      "category": "consistency-reuse-first",
+      "prompt": "Should I kick off a brand-new crawl every time even when a successful local artifact is already sitting there?",
+      "mustInclude": ["no", "reuse"],
+      "mustNotInclude": ["yes"]
+    },
+    {
+      "id": "rephrase-consistency-06",
+      "category": "consistency-reuse-first-rephrase",
+      "prompt": "Blunt version: there is already a successful crawl on disk and create calls are metered. Reuse it or burn money?",
+      "mustInclude": ["reuse", "metered"],
+      "mustNotInclude": ["burn money"]
+    }
+  ]
+}
